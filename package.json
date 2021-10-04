@@ -1,0 +1,19 @@
+{
+  "name": "silverbullet",
+  "version": "1.0.0",
+  "description": "silver bullet of js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notTGY/silverbullet.git"
+  },
+  "author": "notTGY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/notTGY/silverbullet/issues"
+  },
+  "homepage": "https://github.com/notTGY/silverbullet#readme"
+}
