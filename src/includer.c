@@ -1,5 +1,3 @@
-#define DEBUG 0
-
 #include<stdio.h>
 #include"find_imports.c"
 
@@ -21,13 +19,11 @@ int main(int argc, char** argv) {
     output_filename = argv[2];
   }
 
-#ifdef DEBUG
   printf(
     "input: %s, output: %s\n",
     input_filename,
     output_filename
   );
-#endif
 
   char** res = find_imports(input_filename);
 }

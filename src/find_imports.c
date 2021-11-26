@@ -34,16 +34,12 @@ char** find_imports(char* filename) {
    */
   buf[length] = '\0';
 
-#ifdef DEBUG
   printf("Read file %s:\n%s\n", filename, buf);
-#endif
 
   import_start = strstr(buf, IMPORT_STRING);
 
   while (import_start) {
-#ifdef DEBUG
     printf("Found match:\n-->%s\n", import_start);
-#endif
     quote1_start = strchr(import_start, '"');
     quote2_start = strchr(import_start, '\'');
 
@@ -55,22 +51,31 @@ char** find_imports(char* filename) {
     }
     if (quote1_start) {
       quote_end = strchr(quote1_start + 1, '"');
+
+      quote_end[0] = '\0';
+      printf("__%s__\n", quote1_start + 1);
+      quote_end[0] = '\'';
     } else if (quote2_start) {
       quote_end = strchr(quote2_start + 1, '\'');
+
+      quote_end[0] = '\0';
+      printf("__%s__", quote2_start + 1);
+      quote_end[0] = '"';
     } else {
       printf(
         "Couldn't resolve associated filename, make sure to surround it with \" or '\n"
       );
+      goto CLEAR;
     }
+
 
     /**
      * next iteration (do not repeat same entry)
      */
-    import_start = strstr(
-      import_start + 1, IMPORT_STRING
-    );
+    import_start = strstr(quote_end, IMPORT_STRING);
   }
 
+CLEAR:
   free(buf);
   if (close(fd) < 0) {
     perror("failed to close file");
