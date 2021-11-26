@@ -29,4 +29,9 @@ int main(int argc, char** argv) {
   );
 
   char** res = find_imports(input_filename);
+  int i = 0;
+  while (res[i]) {
+    printf("%d: %s\n", i, res[i]);
+    i++;
+  }
 }
