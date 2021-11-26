@@ -3,6 +3,8 @@
 #include<fcntl.h>
 #include<errno.h>
 
+#include"Debug.h"
+
 #define BUF_SIZE (64 * 1024)
 #define IMPORT_STRING "import"
 
@@ -34,12 +36,12 @@ char** find_imports(char* filename) {
    */
   buf[length] = '\0';
 
-  printf("Read file %s:\n%s\n", filename, buf);
+  debug("Read file %s:\n%s\n", filename, buf);
 
   import_start = strstr(buf, IMPORT_STRING);
 
   while (import_start) {
-    printf("Found match:\n-->%s\n", import_start);
+    debug("Found match:\n-->%s\n", import_start);
     quote1_start = strchr(import_start, '"');
     quote2_start = strchr(import_start, '\'');
 
@@ -53,13 +55,13 @@ char** find_imports(char* filename) {
       quote_end = strchr(quote1_start + 1, '"');
 
       quote_end[0] = '\0';
-      printf("__%s__\n", quote1_start + 1);
+      printf("%s\n", quote1_start + 1);
       quote_end[0] = '\'';
     } else if (quote2_start) {
       quote_end = strchr(quote2_start + 1, '\'');
 
       quote_end[0] = '\0';
-      printf("__%s__", quote2_start + 1);
+      printf("%s", quote2_start + 1);
       quote_end[0] = '"';
     } else {
       printf(

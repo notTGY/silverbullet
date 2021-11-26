@@ -1,4 +1,7 @@
 #include<stdio.h>
+
+#include"Debug.h"
+
 #include"find_imports.c"
 
 int main(int argc, char** argv) {
@@ -19,7 +22,7 @@ int main(int argc, char** argv) {
     output_filename = argv[2];
   }
 
-  printf(
+  debug(
     "input: %s, output: %s\n",
     input_filename,
     output_filename
