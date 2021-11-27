@@ -3,6 +3,7 @@
 #include"Debug.h"
 
 #include"find_imports.c"
+#include"recursive_import_calc.c"
 
 int main(int argc, char** argv) {
   char* input_filename;
@@ -28,10 +29,12 @@ int main(int argc, char** argv) {
     output_filename
   );
 
-  char** res = find_imports(input_filename);
-  int i = 0;
-  while (res[i]) {
+  
+  char** res = recursive_import_calc(input_filename);
+  for (int i = 0; res[i]; i++) {
     printf("%d: %s\n", i, res[i]);
-    i++;
+    free(res[i]);
   }
+  free(res);
 }
+
